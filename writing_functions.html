@@ -409,6 +409,62 @@ z_scores(x_vec)</code></pre>
   
   return(z)
 }</code></pre>
+<p>##Multiple Outputs</p>
+<pre class="r"><code>mean_and_sd = function(x) {
+  
+  if (!is.numeric(x)) {
+    stop(&quot;Argument x should be numeric&quot;)
+  } else if (length(x) == 1) {
+    stop(&quot;Cannot be computed for length 1 vectors&quot;)
+  }
+  
+  mean_x = mean(x)
+  sd_x = sd(x)
+
+  tibble(
+    mean = mean_x, 
+    sd = sd_x
+  )
+}</code></pre>
+<p>Check that the function works</p>
+<pre class="r"><code>mean_and_sd(x_vec)</code></pre>
+<pre><code>## # A tibble: 1 × 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  5.51  2.85</code></pre>
+<p>##Multiple Inputs</p>
+<p>I’d like to do this with a function</p>
+<pre class="r"><code>sim_data = tibble(
+  x = rnorm(n = 100, mean = 4, sd = 3)
+)
+
+sim_data |&gt; 
+  summarize(
+    mean = mean(x),
+    sd = sd(x)
+  )</code></pre>
+<pre><code>## # A tibble: 1 × 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  4.28  2.57</code></pre>
+<pre class="r"><code>sim_mean_sd = function(samp_size, mu, sigma) {
+  
+  sim_data = tibble(
+    x = rnorm(samp_size, mean = mu, sd = sigma),
+  )
+  
+  sim_data |&gt; 
+    summarize(
+      mean = mean(x),
+      sd = sd(x)
+    )
+}
+
+sim_mean_sd(100, 6, 3)</code></pre>
+<pre><code>## # A tibble: 1 × 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  5.85  3.11</code></pre>
 
 
 
