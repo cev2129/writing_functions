@@ -465,6 +465,17 @@ sim_mean_sd(100, 6, 3)</code></pre>
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
 ## 1  5.85  3.11</code></pre>
+<p>##Mean Scoping Example</p>
+<pre class="r"><code>f = function(x) {
+  z = x + y
+  z
+}
+
+x = 1
+y = 2
+
+f(x = y)</code></pre>
+<pre><code>## [1] 4</code></pre>
 
 
 

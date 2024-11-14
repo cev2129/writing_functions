@@ -105,7 +105,19 @@ sim_mean_sd = function(samp_size, mu, sigma) {
 
 sim_mean_sd(100, 6, 3)
 ```
+##Mean Scoping Example
 
+```{r}
+f = function(x) {
+  z = x + y
+  z
+}
+
+x = 1
+y = 2
+
+f(x = y)
+```
 
 
 
